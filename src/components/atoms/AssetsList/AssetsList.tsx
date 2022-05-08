@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { theme } from 'src/constants/theme';
 import { Token } from 'src/ts/types';
+
 import AssetsListItem from './AssetsListItem';
+import { Text } from 'src/components/lib';
 
 interface Props {
 	tokens: Array<Token>;
@@ -10,7 +12,9 @@ interface Props {
 const AssetsList = (props: Props) => {
 	return (
 		<View style={styles.assetsContainer}>
-			<Text style={styles.assetsLabel}>Your assets</Text>
+			<Text style={styles.assetsLabel} fontWeight='500'>
+				Your assets
+			</Text>
 			<View>
 				{props.tokens.map(token => (
 					<AssetsListItem key={token.name} {...token} amount='0.1' amountMoney='200.23' />
@@ -36,7 +40,6 @@ const styles = StyleSheet.create({
 	assetsLabel: {
 		fontSize: theme.fontSizes.m,
 		color: theme.colors.gray[600],
-		fontWeight: 'bold',
 		marginBottom: theme.spacing.m,
 	},
 });

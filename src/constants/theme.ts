@@ -31,11 +31,11 @@ export const colors = {
 };
 
 const fontSizes = {
-	xs: scale(14),
-	s: scale(20),
-	m: scale(24),
-	l: scale(36),
-	xl: scale(46),
+	xs: scale(12),
+	s: scale(16),
+	m: scale(20),
+	l: scale(32),
+	xl: scale(40),
 };
 
 export const theme = {
@@ -63,7 +63,6 @@ export const theme = {
 	textVariants: {
 		header: {
 			fontSize: fontSizes.xl,
-			fontWeight: 'bold',
 			color: colors.gray[900],
 		},
 		body: {

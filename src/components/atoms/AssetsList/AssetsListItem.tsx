@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { defaultStyles } from 'src/constants/styles';
 import { scale } from 'src/utils/fonts';
 import { theme } from 'src/constants/theme';
+import { Text } from 'src/components/lib';
 
 interface Props {
 	name: string;
@@ -20,13 +21,17 @@ const AssetsListItem = (props: Props) => {
 			<View style={{ ...styles.tokenLogo, backgroundColor: color }} />
 			<View style={styles.tokenLabel}>
 				<View style={defaultStyles.row}>
-					<Text style={styles.name}>{name}</Text>
+					<Text fontWeight='600' style={styles.name}>
+						{name}
+					</Text>
 					<Text style={styles.abbreviation}>{abbreviation}</Text>
 				</View>
 				<Text style={styles.price}>${price}</Text>
 			</View>
 			<View style={styles.tokenAmountContainer}>
-				<Text style={styles.assetValueMoney}>${amountMoney}</Text>
+				<Text fontWeight='600' style={styles.assetValueMoney}>
+					${amountMoney}
+				</Text>
 				<Text style={styles.amount}>
 					{amount} {abbreviation}
 				</Text>
@@ -56,24 +61,20 @@ const styles = StyleSheet.create({
 	name: {
 		fontSize: theme.fontSizes.m,
 		color: theme.colors.gray[800],
-		fontWeight: 'bold',
 	},
 	abbreviation: {
 		fontSize: theme.fontSizes.xs,
 		color: theme.colors.gray[500],
-		fontWeight: 'bold',
 		marginLeft: theme.spacing.s,
 	},
 	price: {
 		fontSize: theme.fontSizes.xs,
 		color: theme.colors.gray[500],
-		fontWeight: 'bold',
 	},
 
 	tokenValue: {
 		fontSize: theme.fontSizes.xs,
 		color: theme.colors.gray[500],
-		fontWeight: 'bold',
 	},
 
 	tokenAmountContainer: {
@@ -82,13 +83,11 @@ const styles = StyleSheet.create({
 	},
 
 	assetValueMoney: {
-		fontSize: theme.fontSizes.m,
+		fontSize: theme.fontSizes.s,
 		color: theme.colors.gray[800],
-		fontWeight: 'bold',
 	},
 	amount: {
 		fontSize: theme.fontSizes.xs,
 		color: theme.colors.gray[500],
-		fontWeight: 'bold',
 	},
 });
