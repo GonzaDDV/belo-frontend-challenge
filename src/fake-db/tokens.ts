@@ -20,4 +20,58 @@ export const tokens: Array<Token> = [
 		color: theme.colors.usdt,
 		price: 1,
 	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
+	{
+		name: 'Tether',
+		abbreviation: 'USDT',
+		color: theme.colors.usdt,
+		price: 1,
+	},
 ];

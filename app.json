@@ -8,7 +8,6 @@
 		"userInterfaceStyle": "light",
 		"splash": {
 			"image": "./assets/belo.png",
-			"resizeMode": "center",
 			"backgroundColor": "#3B00FF"
 		},
 		"updates": {

@@ -1,14 +1,19 @@
 import { StyleSheet, View } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { theme } from 'src/constants/theme';
 import { AssetsList } from 'src/components/atoms';
 import { tokens } from 'src/fake-db/tokens';
 import { defaultStyles } from 'src/constants/styles';
 
-import { Text } from 'src/components/lib';
+import { Text, FloatingButton } from 'src/components/lib';
+import { RootStackParamList } from 'src/ts/types';
+import ScreenMainView from 'src/components/lib/ScreenMainView';
 
-const Home = () => {
+type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+const HomeScreen = (props: HomeScreenProps) => {
 	return (
-		<View style={[defaultStyles.mainContainer, styles.mainView]}>
+		<ScreenMainView style={[defaultStyles.mainContainer, styles.mainView]}>
 			<View style={styles.moneyContainer}>
 				<Text style={styles.balanceLabel} fontWeight='500'>
 					Total balance
@@ -32,11 +37,11 @@ const Home = () => {
 			</View>
 
 			<AssetsList tokens={tokens} />
-		</View>
+		</ScreenMainView>
 	);
 };
 
-export default Home;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
 	row: {
