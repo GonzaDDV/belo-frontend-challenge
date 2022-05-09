@@ -5,13 +5,12 @@ import { AssetsList } from 'src/components/atoms';
 import { tokens } from 'src/fake-db/tokens';
 import { defaultStyles } from 'src/constants/styles';
 
-import { Text, FloatingButton } from 'src/components/lib';
+import { Text, ScreenMainView } from 'src/components/lib';
 import { RootStackParamList } from 'src/ts/types';
-import ScreenMainView from 'src/components/lib/ScreenMainView';
 
-type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+interface Props {}
 
-const HomeScreen = (props: HomeScreenProps) => {
+const HomeScreen = (props: Props) => {
 	return (
 		<ScreenMainView style={[defaultStyles.mainContainer, styles.mainView]}>
 			<View style={styles.moneyContainer}>

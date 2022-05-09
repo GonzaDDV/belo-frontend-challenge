@@ -1,4 +1,4 @@
-import { scale } from 'src/utils/fonts';
+import { scale } from 'src/utils/sizing';
 
 export const colors = {
 	primary: '#894BF0',

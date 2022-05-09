@@ -11,3 +11,9 @@ export type RootStackParamList = {
 	Home: undefined;
 	Swap: { token: string } | undefined;
 };
+
+export type SwapStackParamList = {
+	SwapHome: { token: string } | undefined;
+	SwapSuccess: undefined;
+	SwapFailure: undefined;
+};

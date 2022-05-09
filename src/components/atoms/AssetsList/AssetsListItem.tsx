@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { defaultStyles } from 'src/constants/styles';
-import { scale } from 'src/utils/fonts';
+import { scale } from 'src/utils/sizing';
 import { theme } from 'src/constants/theme';
 import { Text } from 'src/components/lib';
 

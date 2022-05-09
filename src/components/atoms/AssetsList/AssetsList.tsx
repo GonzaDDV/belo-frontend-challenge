@@ -1,13 +1,12 @@
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { theme } from 'src/constants/theme';
 import { RootStackParamList, Token } from 'src/ts/types';
 
 import AssetsListItem from './AssetsListItem';
-import { FloatingButton, Text } from 'src/components/lib';
-import { height } from 'src/utils/fonts';
+import { RoundedButton, Text } from 'src/components/lib';
+import { height } from 'src/utils/sizing';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import RoundedButton from 'src/components/lib/FloatingButton';
 
 interface Props {
 	tokens: Array<Token>;
@@ -36,7 +35,7 @@ const AssetsList = (props: Props) => {
 				style={{ maxHeight: height * 0.45 }}
 			/>
 
-			<RoundedButton onPress={goToSwapScreen} icon='compare-arrows' style={styles.swapButton} />
+			<RoundedButton size='l' onPress={goToSwapScreen} icon='compare-arrows' style={styles.swapButton} />
 		</View>
 	);
 };

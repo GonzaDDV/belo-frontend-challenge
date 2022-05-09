@@ -1,5 +1,4 @@
-import { Text as DefaultText, TextStyle } from 'react-native';
-import React from 'react';
+import { Text as DefaultText } from 'react-native';
 import {
 	useFonts,
 	Inter_100Thin,
