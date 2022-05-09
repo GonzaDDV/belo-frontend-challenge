@@ -1,39 +1,41 @@
-import { StyleSheet, View } from 'react-native';
-import React from 'react';
+import { StyleSheet, View, Image } from 'react-native';
 import { defaultStyles } from 'src/constants/styles';
 import { scale } from 'src/utils/sizing';
 import { theme } from 'src/constants/theme';
 import { Text } from 'src/components/lib';
+import { CGCoin } from 'src/ts/types';
 
-interface Props {
-	name: string;
-	abbreviation: string;
-	price: number;
-	amount: string;
-	amountMoney: string;
-	color: string;
-}
+type Props = {
+	amount: number;
+};
 
-const AssetsListItem = (props: Props) => {
-	const { name, abbreviation, price, amount, amountMoney, color } = props;
+type AssetListItemProps = CGCoin & Props;
+
+const calculateValue = (amount: number, price: number) => {
+	const value = amount * price;
+	return value.toFixed(2);
+};
+
+const AssetsListItem = (props: AssetListItemProps) => {
+	const { name, symbol, current_price, image, amount } = props;
 	return (
 		<View style={styles.assetsListItem}>
-			<View style={{ ...styles.tokenLogo, backgroundColor: color }} />
+			<Image source={{ uri: image }} style={styles.tokenLogo} />
 			<View style={styles.tokenLabel}>
 				<View style={defaultStyles.row}>
 					<Text fontWeight='600' style={styles.name}>
 						{name}
 					</Text>
-					<Text style={styles.abbreviation}>{abbreviation}</Text>
+					<Text style={styles.abbreviation}>{symbol}</Text>
 				</View>
-				<Text style={styles.price}>${price}</Text>
+				<Text style={styles.price}>${current_price}</Text>
 			</View>
 			<View style={styles.tokenAmountContainer}>
 				<Text fontWeight='600' style={styles.assetValueMoney}>
-					${amountMoney}
+					${calculateValue(amount, current_price)}
 				</Text>
 				<Text style={styles.amount}>
-					{amount} {abbreviation}
+					{amount} {symbol}
 				</Text>
 			</View>
 		</View>
@@ -52,7 +54,6 @@ const styles = StyleSheet.create({
 	tokenLogo: {
 		width: scale(40),
 		height: scale(40),
-		backgroundColor: theme.colors.bitcoin,
 		borderRadius: theme.borderRadius.circle,
 	},
 	tokenLabel: {

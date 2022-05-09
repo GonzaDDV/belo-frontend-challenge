@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, View } from 'react-native';
 import { theme } from 'src/constants/theme';
-import { RootStackParamList, Token } from 'src/ts/types';
+import { CGCoin, RootStackParamList, Token } from 'src/ts/types';
 
 import AssetsListItem from './AssetsListItem';
 import { RoundedButton, Text } from 'src/components/lib';
@@ -9,10 +9,11 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface Props {
-	tokens: Array<Token>;
+	tokens: Array<CGCoin>;
+	loading: boolean;
 }
 
-const keyExtractor = (item: Token, index: number) => item.name + index;
+const keyExtractor = (item: CGCoin, index: number) => item.name + index;
 
 type SwapScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Swap'>;
 
@@ -31,7 +32,7 @@ const AssetsList = (props: Props) => {
 			<FlatList
 				keyExtractor={keyExtractor}
 				data={props.tokens}
-				renderItem={({ item }) => <AssetsListItem {...item} amount='0.1' amountMoney='200.23' />}
+				renderItem={({ item }) => <AssetsListItem {...item} amount={0.1} />}
 				style={{ maxHeight: height * 0.45 }}
 			/>
 

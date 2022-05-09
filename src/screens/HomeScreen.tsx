@@ -7,10 +7,13 @@ import { defaultStyles } from 'src/constants/styles';
 
 import { Text, ScreenMainView } from 'src/components/lib';
 import { RootStackParamList } from 'src/ts/types';
+import { useCoinGecko } from 'src/hooks/useCoinGecko';
 
 interface Props {}
 
 const HomeScreen = (props: Props) => {
+	const { coins, loading } = useCoinGecko();
+
 	return (
 		<ScreenMainView style={[defaultStyles.mainContainer, styles.mainView]}>
 			<View style={styles.moneyContainer}>
@@ -35,7 +38,7 @@ const HomeScreen = (props: Props) => {
 				</View>
 			</View>
 
-			<AssetsList tokens={tokens} />
+			<AssetsList tokens={coins} loading={loading} />
 		</ScreenMainView>
 	);
 };
