@@ -1,18 +1,23 @@
 import { StyleSheet, View } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { theme } from 'src/constants/theme';
 import { AssetsList } from 'src/components/atoms';
-import { tokens } from 'src/fake-db/tokens';
 import { defaultStyles } from 'src/constants/styles';
 
 import { Text, ScreenMainView } from 'src/components/lib';
-import { RootStackParamList } from 'src/ts/types';
-import { useCoinGecko } from 'src/hooks/useCoinGecko';
+import { useSelector } from 'react-redux';
+import { RootState, useTypedDispatch } from 'src/state/store';
+import { useEffect } from 'react';
+import { fetchCoins } from 'src/state/actions/coins';
 
 interface Props {}
 
 const HomeScreen = (props: Props) => {
-	const { coins, loading } = useCoinGecko();
+	const { coins, loading } = useSelector((state: RootState) => state.coins);
+	const dispatch = useTypedDispatch();
+
+	useEffect(() => {
+		dispatch(fetchCoins());
+	}, []);
 
 	return (
 		<ScreenMainView style={[defaultStyles.mainContainer, styles.mainView]}>
