@@ -1,20 +1,22 @@
-import { StyleSheet, View, TextInput as DefaultTextInput, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
 import { defaultStyles } from 'src/constants/styles';
 import { Text, TextInput } from 'src/components/lib';
 import { theme } from 'src/constants/theme';
 import { scale } from 'src/utils/sizing';
 import { MaterialIcons } from '@expo/vector-icons';
+import { TextInputProps } from 'src/components/lib/TextInput';
 
 interface Props {
 	topLabel: string;
 	maxAmount?: number;
+	onMaxAmountPress?: () => void;
 	token: string;
 }
 
-type SwapProps = DefaultTextInput['props'] & Props;
+type SwapInputProps = TextInputProps & Props;
 
-const SwapInput = (props: SwapProps) => {
-	const { topLabel, maxAmount, token } = props;
+const SwapInput = (props: SwapInputProps) => {
+	const { topLabel, maxAmount, token, onMaxAmountPress } = props;
 
 	return (
 		<View>
@@ -23,7 +25,7 @@ const SwapInput = (props: SwapProps) => {
 					{topLabel}
 				</Text>
 				{maxAmount && (
-					<TouchableWithoutFeedback>
+					<TouchableWithoutFeedback onPress={onMaxAmountPress}>
 						<View style={styles.maxButton}>
 							<Text style={styles.maxButtonText} fontWeight='600'>
 								MAX {maxAmount}

@@ -6,10 +6,16 @@ import { useRef } from 'react';
 import { width } from 'src/utils/sizing';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from 'src/ts/types';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/state/store';
+import { SelectedCoin } from 'src/state/slices/swap';
 
 type SwapSuccessScreenProps = NativeStackScreenProps<RootStackParamList, 'Swap'>;
 
 const SwapSuccessScreen = (props: SwapSuccessScreenProps) => {
+	const { selectedCoins } = useSelector((state: RootState) => state.swap);
+	const [firstCoin, secondCoin]: SelectedCoin[] = selectedCoins;
+
 	const { navigation } = props;
 	const animation = useRef(null);
 
@@ -30,7 +36,7 @@ const SwapSuccessScreen = (props: SwapSuccessScreenProps) => {
 				Your transaction was completed!
 			</Text>
 			<Text style={styles.text} fontWeight='400'>
-				You succesfully swapped 0.03 ETH for 120 USDT
+				You succesfully swapped {firstCoin.amount} {firstCoin.key} for {secondCoin.amount} {secondCoin.key}
 			</Text>
 			<Button onPress={goToHomeScreen} text='Volver al inicio' size='m' style={styles.homeButton} />
 		</ScreenMainView>

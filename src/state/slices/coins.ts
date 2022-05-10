@@ -1,16 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { ApiErrorResponse } from 'apisauce';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { user } from 'src/fake-db/user';
 import { CGCoin } from 'src/ts/types';
 import { fetchCoins } from '../actions/coins';
 
-const coinsSlice = createSlice({
+interface User {
+	coins: typeof user.coins;
+	totalValue: number;
+}
+
+interface CoinsState {
+	coins: CGCoin[];
+	loading: boolean;
+
+	error: unknown;
+
+	user: User;
+}
+
+export const coinsSlice = createSlice({
 	name: 'coins',
 	initialState: {
-		coins: [] as CGCoin[],
+		coins: [],
 		loading: false,
-		error: null as unknown,
+		error: null,
+
+		user: {
+			coins: user.coins,
+			totalValue: 0,
+		},
+	} as CoinsState,
+	reducers: {
+		updateTotalValue: (state, action: PayloadAction<CGCoin[]>) => {
+			const prices = action.payload.map(coin => [coin.name, coin.current_price]);
+
+			const totalValue = prices.reduce(
+				(acc, [name, price]) => acc + user.coins[name as keyof typeof user.coins].amount * +price,
+				0
+			);
+
+			state.user.totalValue = totalValue;
+		},
 	},
-	reducers: {},
 	extraReducers: builder => {
 		builder.addCase(fetchCoins.pending, state => {
 			state.loading = true;

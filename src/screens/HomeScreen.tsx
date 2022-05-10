@@ -4,20 +4,12 @@ import { AssetsList } from 'src/components/atoms';
 import { defaultStyles } from 'src/constants/styles';
 
 import { Text, ScreenMainView } from 'src/components/lib';
-import { useSelector } from 'react-redux';
-import { RootState, useTypedDispatch } from 'src/state/store';
-import { useEffect } from 'react';
-import { fetchCoins } from 'src/state/actions/coins';
+import { useCoinGecko } from 'src/hooks/useCoinGecko';
 
 interface Props {}
 
 const HomeScreen = (props: Props) => {
-	const { coins, loading } = useSelector((state: RootState) => state.coins);
-	const dispatch = useTypedDispatch();
-
-	useEffect(() => {
-		dispatch(fetchCoins());
-	}, []);
+	const { coins, loading, user } = useCoinGecko();
 
 	return (
 		<ScreenMainView style={[defaultStyles.mainContainer, styles.mainView]}>
@@ -26,8 +18,8 @@ const HomeScreen = (props: Props) => {
 					Total balance
 				</Text>
 				<View style={styles.moneyTextsContainer}>
-					<Text style={styles.currentMoneyText} fontWeight='800'>
-						$3.230,00
+					<Text style={styles.currentMoneyText} fontWeight='800' numberOfLines={1}>
+						${user.totalValue.toFixed(2)}
 					</Text>
 					<Text style={styles.secondaryLabel} fontWeight='bold'>
 						USD
@@ -75,11 +67,12 @@ const styles = StyleSheet.create({
 	},
 	currentMoneyText: {
 		...theme.textVariants.header,
+		flex: 1,
 	},
 	secondaryLabel: {
 		fontSize: theme.fontSizes.s,
 		color: theme.colors.gray[500],
-		marginLeft: theme.spacing.s,
+		marginLeft: theme.spacing.m,
 	},
 	gainsContainer: {
 		flexDirection: 'row',

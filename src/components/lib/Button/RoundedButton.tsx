@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Animated, StyleProp, StyleSheet, TouchableOpacity } from 'react-native';
 import { theme } from 'src/constants/theme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
@@ -8,12 +8,13 @@ interface CustomProps {
 	size: 's' | 'm' | 'l';
 	icon?: keyof typeof MaterialIcons.glyphMap;
 	isSecondary?: boolean;
+	animationStyle?: StyleProp<any>;
 }
 
 type ButtonProps = TouchableOpacity['props'] & CustomProps;
 
 const RoundedButton = (props: ButtonProps) => {
-	const { size, icon, isSecondary, style } = props;
+	const { size, icon, isSecondary, style, animationStyle } = props;
 
 	return (
 		<TouchableOpacity
@@ -25,11 +26,21 @@ const RoundedButton = (props: ButtonProps) => {
 				size === 's' ? styles.smallButton : size === 'm' ? styles.mediumButton : styles.largeButton,
 			]}
 		>
-			<MaterialIcons
-				name={icon}
-				size={buttonSizeToStyle[size].icon || 32}
-				color={isSecondary ? theme.colors.primary : '#fff'}
-			/>
+			{animationStyle ? (
+				<Animated.View style={animationStyle}>
+					<MaterialIcons
+						name={icon}
+						size={buttonSizeToStyle[size].icon || 32}
+						color={isSecondary ? theme.colors.primary : '#fff'}
+					/>
+				</Animated.View>
+			) : (
+				<MaterialIcons
+					name={icon}
+					size={buttonSizeToStyle[size].icon || 32}
+					color={isSecondary ? theme.colors.primary : '#fff'}
+				/>
+			)}
 		</TouchableOpacity>
 	);
 };

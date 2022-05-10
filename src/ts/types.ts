@@ -51,4 +51,5 @@ export type SwapStackParamList = {
 	SwapHome: { token: string } | undefined;
 	SwapSuccess: undefined;
 	SwapFailure: undefined;
+	SwapConfirmation: undefined;
 };

@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import { TypedUseSelectorHook, useDispatch } from 'react-redux';
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import coins from './slices/coins';
+import swap from './slices/swap';
 
 const rootReducer = {
 	coins,
+	swap,
 };
 
 export const store = configureStore({

@@ -17,9 +17,9 @@
 #### Requerimientos mínimos
 
 - [x] Pantalla de home
-- [ ] Pantalla de swap (conversión)
+- [x] Pantalla de swap (conversión)
 - [ ] Pantalla de confirmación
-- [ ] Pantalla de estado de swap (swap exitoso o fallido)
+- [x] Pantalla de estado de swap (swap exitoso o fallido)
 - [ ] Testing
 
 #### Aclaraciones

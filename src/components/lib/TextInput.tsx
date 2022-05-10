@@ -8,7 +8,7 @@ interface Props {
 	bold?: boolean;
 }
 
-type TextInputProps = DefaultTextInput['props'] & Props;
+export type TextInputProps = DefaultTextInput['props'] & Props;
 
 const TextInput = (props: TextInputProps) => {
 	const { rightText, bold } = props;

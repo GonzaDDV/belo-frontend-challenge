@@ -49,6 +49,7 @@ const Text = (props: TextProps) => {
 
 	return (
 		<DefaultText
+			{...props}
 			style={[props.style, { fontFamily: props.fontWeight ? fontWeightMap[props.fontWeight] : fontWeightMap.normal }]}
 		>
 			{props.children}

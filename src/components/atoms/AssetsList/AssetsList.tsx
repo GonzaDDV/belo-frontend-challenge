@@ -7,6 +7,7 @@ import { RoundedButton, Text } from 'src/components/lib';
 import { height } from 'src/utils/sizing';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { user } from 'src/fake-db/user';
 
 interface Props {
 	tokens: Array<CGCoin>;
@@ -32,7 +33,9 @@ const AssetsList = (props: Props) => {
 			<FlatList
 				keyExtractor={keyExtractor}
 				data={props.tokens}
-				renderItem={({ item }) => <AssetsListItem {...item} amount={0.1} />}
+				renderItem={({ item }) => (
+					<AssetsListItem {...item} amount={user.coins[item.name as keyof typeof user.coins].amount || 0.1} />
+				)}
 				style={{ maxHeight: height * 0.45 }}
 			/>
 
