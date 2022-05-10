@@ -4,7 +4,6 @@ export const colors = {
 	primary: '#894BF0',
 	secondary: '#9C3AEA',
 
-	red: '#CD0E61',
 	black: '#0B0B0B',
 	white: '#F0F2F3',
 
@@ -28,6 +27,11 @@ export const colors = {
 		100: '#44CA49',
 		200: '#4E9E51',
 	},
+
+	red: {
+		100: '#EE163D',
+		200: '#CD0E30',
+	},
 };
 
 const fontSizes = {
@@ -45,6 +49,7 @@ export const theme = {
 		primary: colors.primary,
 		gray: colors.gray,
 		green: colors.green,
+		red: colors.red,
 		white: colors.white,
 
 		bitcoin: colors.bitcoin,

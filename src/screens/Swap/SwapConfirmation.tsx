@@ -14,7 +14,6 @@ type SwapConfirmationScreenProps = NativeStackScreenProps<SwapStackParamList, 'S
 
 const SwapConfirmationScreen = (props: SwapConfirmationScreenProps) => {
 	const { selectedCoins } = useSelector((state: RootState) => state.swap);
-
 	const [firstCoin, secondCoin]: SelectedCoin[] = selectedCoins;
 
 	const { navigation } = props;
@@ -38,7 +37,6 @@ const SwapConfirmationScreen = (props: SwapConfirmationScreenProps) => {
 				<Text style={styles.text} fontWeight='400'>
 					You will swap {firstCoin.amount} {firstCoin.key} for {secondCoin.amount} {secondCoin.key}
 				</Text>
-				<Text style={styles.rateLabel}>(1 ETH = $1,000)</Text>
 				<Button onPress={confirmTransaction} text='Confirm' size='m' style={styles.confirmButton} />
 			</View>
 		</ScreenMainView>
@@ -69,12 +67,6 @@ const styles = StyleSheet.create({
 		fontSize: theme.fontSizes.m,
 		textAlign: 'center',
 		marginTop: theme.spacing.l,
-	},
-
-	rateLabel: {
-		textAlign: 'center',
-		fontSize: theme.fontSizes.s,
-		color: theme.colors.gray[600],
 	},
 
 	confirmButton: {

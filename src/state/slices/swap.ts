@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { user } from 'src/fake-db/user';
+import { getEquivalentAmountInOtherCoin } from 'src/utils/coins';
 
 export interface SelectedCoin {
 	key: string;
@@ -8,6 +8,7 @@ export interface SelectedCoin {
 
 interface SwapState {
 	selectedCoins: SelectedCoin[];
+	error: string;
 }
 
 const swapSlice = createSlice({
@@ -23,14 +24,17 @@ const swapSlice = createSlice({
 				amount: '',
 			},
 		],
+		error: '',
 	} as SwapState,
 	reducers: {
 		changeFirstCoin: (state, action) => {
 			state.selectedCoins[0] = action.payload;
+			state.error = '';
 		},
 
 		changeSecondCoin: (state, action) => {
 			state.selectedCoins[1] = action.payload;
+			state.error = '';
 		},
 
 		updateCoinAmount: (state, action) => {
@@ -39,17 +43,22 @@ const swapSlice = createSlice({
 				...state.selectedCoins[index],
 				amount,
 			};
-
-			console.log(state.selectedCoins);
+			state.error = '';
 		},
 
 		swapFirstAndSecond: state => {
 			const [first, second] = state.selectedCoins;
 			state.selectedCoins = [second, first];
+			state.error = '';
+		},
+
+		updateErrorMessage: (state, action) => {
+			state.error = action.payload;
 		},
 	},
 	extraReducers: builder => {},
 });
 
-export const { changeFirstCoin, changeSecondCoin, swapFirstAndSecond, updateCoinAmount } = swapSlice.actions;
+export const { changeFirstCoin, changeSecondCoin, swapFirstAndSecond, updateCoinAmount, updateErrorMessage } =
+	swapSlice.actions;
 export default swapSlice.reducer;

@@ -7,19 +7,25 @@ import { SwapStackParamList } from 'src/ts/types';
 import { SwapButton, SwapInput } from 'src/components/atoms/SwapScreen';
 import { useSelector } from 'react-redux';
 import { RootState, useTypedDispatch } from 'src/state/store';
-import { SelectedCoin, swapFirstAndSecond, updateCoinAmount } from 'src/state/slices/swap';
-import { useMemo } from 'react';
+import { SelectedCoin, swapFirstAndSecond, updateCoinAmount, updateErrorMessage } from 'src/state/slices/swap';
+import { useEffect, useMemo } from 'react';
+import { getCoinPriceFromCoinArray, getEquivalentAmountInOtherCoin } from 'src/utils/coins';
 
 type SwapScreenProps = NativeStackScreenProps<SwapStackParamList, 'SwapHome'>;
 
 const SwapScreen = (props: SwapScreenProps) => {
-	const { user } = useSelector((state: RootState) => state.coins);
-	const { selectedCoins } = useSelector((state: RootState) => state.swap);
+	const { coins, user } = useSelector((state: RootState) => state.coins);
+	const { selectedCoins, error } = useSelector((state: RootState) => state.swap);
 	const dispatch = useTypedDispatch();
-	const { navigation } = props;
 
-	const navigateToSwapSuccessScreen = () => {
-		navigation.navigate('SwapConfirmation');
+	const navigateToSwapConfirmationScreen = () => {
+		if (parseFloat(firstCoin.amount) > maxAmount) {
+			return dispatch(updateErrorMessage("You don't have enough amount to swap."));
+		}
+		if (!parseFloat(firstCoin.amount)) {
+			return dispatch(updateErrorMessage('Please, enter an amount.'));
+		}
+		props.navigation.navigate('SwapConfirmation');
 	};
 
 	const [firstCoin, secondCoin]: SelectedCoin[] = selectedCoins;
@@ -34,6 +40,23 @@ const SwapScreen = (props: SwapScreenProps) => {
 		dispatch(updateCoinAmount({ amount: maxAmount, index: 0 }));
 	};
 
+	const handleFirstCoinAmountChange = (amount: string) => {
+		dispatch(updateCoinAmount({ amount, index: 0 }));
+	};
+
+	useEffect(() => {
+		dispatch(
+			updateCoinAmount({
+				amount: getEquivalentAmountInOtherCoin({
+					firstCoinAmount: parseFloat(firstCoin.amount) || 0,
+					firstCoinPrice: getCoinPriceFromCoinArray(coins, firstCoin.key),
+					secondCoinPrice: getCoinPriceFromCoinArray(coins, secondCoin.key),
+				}),
+				index: 1,
+			})
+		);
+	}, [firstCoin.amount]);
+
 	return (
 		<ScreenMainView style={styles.mainContainer} showBackButton>
 			<Text style={styles.title} fontWeight='bold'>
@@ -44,25 +67,22 @@ const SwapScreen = (props: SwapScreenProps) => {
 				<SwapInput
 					topLabel='Selling'
 					token={firstCoin.key}
-					placeholder={`0 ${firstCoin.key}`}
+					placeholder='0'
 					maxAmount={maxAmount}
 					onMaxAmountPress={handleMaxButtonPress}
 					value={firstCoin.amount.toString() || ''}
-					onChangeText={text => {
-						dispatch(updateCoinAmount({ amount: text, index: 0 }));
-					}}
+					onChangeText={handleFirstCoinAmountChange}
 				/>
+				{error ? <Text style={styles.error}>{error}</Text> : null}
 				<SwapButton onPress={handleSwapButtonPress} />
 				<SwapInput
 					topLabel='Buying'
 					token={secondCoin.key}
-					placeholder={`0 ${secondCoin.key}`}
+					placeholder='0'
+					editable={false}
 					value={secondCoin.amount.toString() || ''}
-					onChangeText={text => {
-						dispatch(updateCoinAmount({ amount: text, index: 1 }));
-					}}
 				/>
-				<Button onPress={navigateToSwapSuccessScreen} text='Swap' size='m' style={styles.button} />
+				<Button onPress={navigateToSwapConfirmationScreen} text='Swap' size='m' style={styles.button} />
 			</View>
 		</ScreenMainView>
 	);
@@ -85,5 +105,11 @@ const styles = StyleSheet.create({
 	button: {
 		marginTop: theme.spacing.l,
 		width: '100%',
+	},
+
+	error: {
+		color: theme.colors.red[100],
+		fontSize: theme.fontSizes.s,
+		marginTop: theme.spacing.s,
 	},
 });
