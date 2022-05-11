@@ -11,21 +11,23 @@ interface SwapState {
 	error: string;
 }
 
+const initialState: SwapState = {
+	selectedCoins: [
+		{
+			key: 'Ethereum',
+			amount: '',
+		},
+		{
+			key: 'Tether',
+			amount: '',
+		},
+	],
+	error: '',
+};
+
 const swapSlice = createSlice({
 	name: 'coins',
-	initialState: {
-		selectedCoins: [
-			{
-				key: 'Ethereum',
-				amount: '',
-			},
-			{
-				key: 'Tether',
-				amount: '',
-			},
-		],
-		error: '',
-	} as SwapState,
+	initialState,
 	reducers: {
 		changeFirstCoin: (state, action) => {
 			state.selectedCoins[0] = action.payload;
@@ -55,10 +57,21 @@ const swapSlice = createSlice({
 		updateErrorMessage: (state, action) => {
 			state.error = action.payload;
 		},
+
+		resetSwapState: state => {
+			state.selectedCoins = initialState.selectedCoins;
+			state.error = '';
+		},
 	},
 	extraReducers: builder => {},
 });
 
-export const { changeFirstCoin, changeSecondCoin, swapFirstAndSecond, updateCoinAmount, updateErrorMessage } =
-	swapSlice.actions;
+export const {
+	changeFirstCoin,
+	changeSecondCoin,
+	swapFirstAndSecond,
+	updateCoinAmount,
+	updateErrorMessage,
+	resetSwapState,
+} = swapSlice.actions;
 export default swapSlice.reducer;

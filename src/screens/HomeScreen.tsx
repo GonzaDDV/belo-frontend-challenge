@@ -43,7 +43,7 @@ const HomeScreen = (props: Props) => {
 				</View>
 			</View>
 
-			<AssetsList tokens={coins} loading={loading} />
+			<AssetsList tokens={coins} loading={loading} user={user} />
 		</ScreenMainView>
 	);
 };

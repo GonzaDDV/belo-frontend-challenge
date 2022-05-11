@@ -8,9 +8,11 @@ import { height } from 'src/utils/sizing';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { user } from 'src/fake-db/user';
+import { User } from 'src/state/slices/coins';
 
 interface Props {
 	tokens: Array<CGCoin>;
+	user: User;
 	loading: boolean;
 }
 
@@ -34,7 +36,7 @@ const AssetsList = (props: Props) => {
 				keyExtractor={keyExtractor}
 				data={props.tokens}
 				renderItem={({ item }) => (
-					<AssetsListItem {...item} amount={user.coins[item.name as keyof typeof user.coins].amount || 0.1} />
+					<AssetsListItem {...item} amount={props.user.coins[item.name as keyof typeof user.coins].amount} />
 				)}
 				style={{ maxHeight: height * 0.45 }}
 			/>

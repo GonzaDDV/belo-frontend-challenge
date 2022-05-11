@@ -2,8 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { user } from 'src/fake-db/user';
 import { CGCoin } from 'src/ts/types';
 import { fetchCoins } from '../actions/coins';
+import { SelectedCoin } from './swap';
 
-interface User {
+export interface User {
 	coins: typeof user.coins;
 	totalValue: number;
 	totalPriceChange24hs: number;
@@ -56,10 +57,21 @@ export const coinsSlice = createSlice({
 				(acc, { name, changeTotal }) => acc + user.coins[name as keyof typeof user.coins].amount * +changeTotal,
 				0
 			);
-			const totalPercentage = pricePercentages.reduce((acc, { changePercentage }) => acc + +changePercentage, 0);
 
 			state.user.totalPriceChange24hs = totalChanged;
-			state.user.totalPriceChangePercentage24hs = totalPercentage;
+			state.user.totalPriceChangePercentage24hs = (totalChanged / state.user.totalValue) * 100;
+		},
+
+		swapCoinsAmount: (state, action: PayloadAction<SelectedCoin[]>) => {
+			const [first, second] = action.payload;
+			const firstCoin = state.user.coins[first.key as keyof typeof state.user.coins];
+			const secondCoin = state.user.coins[second.key as keyof typeof state.user.coins];
+
+			firstCoin.amount -= +first.amount;
+			secondCoin.amount += +second.amount;
+
+			state.user.coins[first.key as keyof typeof state.user.coins] = firstCoin;
+			state.user.coins[second.key as keyof typeof state.user.coins] = secondCoin;
 		},
 	},
 	extraReducers: builder => {
@@ -77,4 +89,5 @@ export const coinsSlice = createSlice({
 	},
 });
 
+export const { swapCoinsAmount } = coinsSlice.actions;
 export default coinsSlice.reducer;

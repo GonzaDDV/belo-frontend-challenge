@@ -70,7 +70,7 @@ const SwapScreen = (props: SwapScreenProps) => {
 					placeholder='0'
 					maxAmount={maxAmount}
 					onMaxAmountPress={handleMaxButtonPress}
-					value={firstCoin.amount.toString() || ''}
+					value={firstCoin?.amount.toString() || ''}
 					onChangeText={handleFirstCoinAmountChange}
 				/>
 				{error ? <Text style={styles.error}>{error}</Text> : null}
@@ -80,7 +80,7 @@ const SwapScreen = (props: SwapScreenProps) => {
 					token={secondCoin.key}
 					placeholder='0'
 					editable={false}
-					value={secondCoin.amount.toString() || ''}
+					value={secondCoin?.amount.toString() || ''}
 				/>
 				<Button onPress={navigateToSwapConfirmationScreen} text='Swap' size='m' style={styles.button} />
 			</View>

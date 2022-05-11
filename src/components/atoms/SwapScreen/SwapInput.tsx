@@ -24,7 +24,7 @@ const SwapInput = (props: SwapInputProps) => {
 				<Text style={styles.label} fontWeight='500'>
 					{topLabel}
 				</Text>
-				{maxAmount && (
+				{maxAmount !== (null || undefined) && (
 					<TouchableWithoutFeedback onPress={onMaxAmountPress}>
 						<View style={styles.maxButton}>
 							<Text style={styles.maxButtonText} fontWeight='600'>

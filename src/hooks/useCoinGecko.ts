@@ -9,7 +9,7 @@ export const useCoinGecko = () => {
 
 	useEffect(() => {
 		dispatch(fetchCoins(Object.keys(user.coins)));
-	}, []);
+	}, [user.coins]);
 
 	return { coins, loading, user };
 };
