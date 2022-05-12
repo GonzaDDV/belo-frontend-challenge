@@ -22,7 +22,6 @@ const SwapConfirmationScreen = (props: SwapConfirmationScreenProps) => {
 
 	const confirmTransaction = () => {
 		dispatch(swapCoinsAmount([firstCoin, secondCoin]));
-		dispatch(resetSwapState());
 		// to replace navigation history, so you can't go back with back button or gesture
 		navigation.dispatch(
 			CommonActions.reset({

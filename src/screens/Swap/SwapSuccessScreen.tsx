@@ -2,24 +2,26 @@ import { StyleSheet, View } from 'react-native';
 import { Button, ScreenMainView, Text } from 'src/components/lib';
 import { theme } from 'src/constants/theme';
 import LottieView from 'lottie-react-native';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { width } from 'src/utils/sizing';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from 'src/ts/types';
 import { useSelector } from 'react-redux';
-import { RootState } from 'src/state/store';
-import { SelectedCoin } from 'src/state/slices/swap';
+import { RootState, useTypedDispatch } from 'src/state/store';
+import { resetSwapState, SelectedCoin } from 'src/state/slices/swap';
 
 type SwapSuccessScreenProps = NativeStackScreenProps<RootStackParamList, 'Swap'>;
 
 const SwapSuccessScreen = (props: SwapSuccessScreenProps) => {
 	const { selectedCoins } = useSelector((state: RootState) => state.swap);
 	const [firstCoin, secondCoin]: SelectedCoin[] = selectedCoins;
+	const dispatch = useTypedDispatch();
 
 	const { navigation } = props;
 	const animation = useRef(null);
 
 	const goToHomeScreen = () => {
+		dispatch(resetSwapState());
 		navigation.navigate('Home');
 	};
 

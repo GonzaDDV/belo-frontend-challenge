@@ -14,7 +14,7 @@ interface SwapState {
 const initialState: SwapState = {
 	selectedCoins: [
 		{
-			key: 'Ethereum',
+			key: 'Bitcoin',
 			amount: '',
 		},
 		{
@@ -41,6 +41,7 @@ const swapSlice = createSlice({
 
 		updateCoinAmount: (state, action) => {
 			const { index, amount } = action.payload;
+			console.log({ index, amount });
 			state.selectedCoins[index] = {
 				...state.selectedCoins[index],
 				amount,

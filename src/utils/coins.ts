@@ -15,3 +15,12 @@ export const getCoinPriceFromCoinArray = (coinArray: CGCoin[], coinName: string)
 	if (!coin) return 0;
 	return coin.current_price;
 };
+
+export const cgCoinToSwapStateCoin = (coins: CGCoin[]) => {
+	return coins.map(coin => {
+		return {
+			key: coin.name,
+			amount: '',
+		};
+	});
+};

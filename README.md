@@ -18,7 +18,7 @@
 
 - [x] Pantalla de home
 - [x] Pantalla de swap (conversión)
-- [ ] Pantalla de confirmación
+- [x] Pantalla de confirmación
 - [x] Pantalla de estado de swap (swap exitoso o fallido)
 - [ ] Testing
 

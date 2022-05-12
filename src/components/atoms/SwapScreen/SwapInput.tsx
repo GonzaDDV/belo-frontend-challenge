@@ -1,22 +1,27 @@
-import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, TouchableWithoutFeedback, Alert } from 'react-native';
 import { defaultStyles } from 'src/constants/styles';
 import { Text, TextInput } from 'src/components/lib';
 import { theme } from 'src/constants/theme';
-import { scale } from 'src/utils/sizing';
-import { MaterialIcons } from '@expo/vector-icons';
 import { TextInputProps } from 'src/components/lib/TextInput';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/state/store';
+import CoinPicker from './CoinPicker';
+import { cgCoinToSwapStateCoin } from 'src/utils/coins';
+import { SelectedCoin } from 'src/state/slices/swap';
 
 interface Props {
 	topLabel: string;
 	maxAmount?: number;
 	onMaxAmountPress?: () => void;
-	token: string;
+	handleCoinChange: (coin: SelectedCoin) => void;
+	stateValue: SelectedCoin;
 }
 
 type SwapInputProps = TextInputProps & Props;
 
 const SwapInput = (props: SwapInputProps) => {
-	const { topLabel, maxAmount, token, onMaxAmountPress } = props;
+	const { coins } = useSelector((state: RootState) => state.coins);
+	const { topLabel, maxAmount, stateValue, onMaxAmountPress, handleCoinChange } = props;
 
 	return (
 		<View>
@@ -34,11 +39,8 @@ const SwapInput = (props: SwapInputProps) => {
 					</TouchableWithoutFeedback>
 				)}
 			</View>
-			<View style={[defaultStyles.row]}>
-				<Text fontWeight='600'>{token}</Text>
-				<MaterialIcons name='arrow-drop-down' size={scale(40)} color={theme.colors.gray[400]} />
-			</View>
 
+			<CoinPicker coins={cgCoinToSwapStateCoin(coins)} changeValue={handleCoinChange} value={stateValue} />
 			<TextInput keyboardType='numeric' {...props} />
 		</View>
 	);
