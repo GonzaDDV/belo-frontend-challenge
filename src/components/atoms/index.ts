@@ -1,3 +1,5 @@
-import AssetsList from './AssetsList/AssetsList';
+import AssetsList from "./AssetsList/AssetsList.component";
+import SwapButton from "./SwapScreen/SwapButton/SwapButton.component";
+import SwapInput from "./SwapScreen/SwapInput/SwapInput.component";
 
-export { AssetsList };
+export { AssetsList, SwapButton, SwapInput };

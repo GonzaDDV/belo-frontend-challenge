@@ -1,30 +1,34 @@
 {
-	"expo": {
-		"name": "belo-challenge",
-		"slug": "belo-challenge",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./assets/icon.png",
-		"userInterfaceStyle": "light",
-		"splash": {
-			"image": "./assets/belo.png",
-			"backgroundColor": "#3B00FF"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./assets/adaptive-icon.png",
-				"backgroundColor": "#FFFFFF"
-			}
-		},
-		"web": {
-			"favicon": "./assets/favicon.png"
-		}
-	}
+  "expo": {
+    "name": "Belo Challenge - @gonzaddv",
+    "slug": "belo-challenge",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#3B00FF"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "bundleIdentifier": "com.gonzaddv.belochallenge",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "#3B00FF"
+      },
+      "package": "com.gonzaddv.belo_challenge",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }

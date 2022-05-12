@@ -1,15 +1,18 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { fetchCoins } from 'src/state/actions/coins';
-import { RootState, useTypedDispatch } from 'src/state/store';
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { acceptedCoins } from "src/constants/acceptedCoins";
+import { fetchCoins } from "src/state/slices/coins";
+import { RootState, useTypedDispatch } from "src/state/store";
 
 export const useCoinGecko = () => {
-	const { coins, loading, user } = useSelector((state: RootState) => state.coins);
-	const dispatch = useTypedDispatch();
+  const { coins, loading, user } = useSelector(
+    (state: RootState) => state.coins
+  );
+  const dispatch = useTypedDispatch();
 
-	useEffect(() => {
-		dispatch(fetchCoins(Object.keys(user.coins)));
-	}, [user.coins]);
+  useEffect(() => {
+    dispatch(fetchCoins(acceptedCoins));
+  }, [acceptedCoins]);
 
-	return { coins, loading, user };
+  return { coins, loading, user };
 };

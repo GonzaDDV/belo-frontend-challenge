@@ -7,6 +7,7 @@
 - TypeScript
 - React Native
 - Expo
+- Jest
 
 ## :art: [Figma con diseños](https://www.figma.com/file/ewIlwnMeQvTae1eIpyNX1r/Belo-Challenge?node-id=0%3A1)
 
@@ -20,7 +21,7 @@
 - [x] Pantalla de swap (conversión)
 - [x] Pantalla de confirmación
 - [x] Pantalla de estado de swap (swap exitoso o fallido)
-- [ ] Testing
+- [x] Testing
 
 #### Aclaraciones
 
