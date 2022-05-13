@@ -27,7 +27,7 @@ interface CustomProps {
     | "900";
 }
 
-type TextProps = DefaultText["props"] & CustomProps;
+export type CustomTextProps = DefaultText["props"] & CustomProps;
 
 const fontWeightMap = {
   bold: "Inter_700Bold",
@@ -43,7 +43,7 @@ const fontWeightMap = {
   900: "Inter_900Black",
 };
 
-const Text = (props: TextProps) => {
+const Text = (props: CustomTextProps) => {
   let [fontsLoaded] = useFonts({
     Inter_100Thin,
     Inter_200ExtraLight,

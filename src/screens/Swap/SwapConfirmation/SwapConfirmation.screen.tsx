@@ -22,15 +22,20 @@ const SwapConfirmationScreen = (props: SwapConfirmationScreenProps) => {
   const { navigation } = props;
 
   const confirmTransaction = () => {
-    dispatch(swapCoinsAmount([firstCoin, secondCoin]));
-
-    // to replace navigation history, so you can't go back with back button or gesture
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: "SwapSuccess" }],
-      })
-    );
+    let name: keyof SwapStackParamList = "SwapSuccess";
+    try {
+      dispatch(swapCoinsAmount([firstCoin, secondCoin]));
+    } catch {
+      name = "SwapFailure";
+    } finally {
+      // to replace navigation history, so you can't go back with back button or gesture
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name }],
+        })
+      );
+    }
   };
 
   return (

@@ -3,6 +3,8 @@ import { defaultStyles } from "src/constants/styles";
 import { Text } from "src/components/lib";
 import { CGCoin } from "src/ts/types";
 import styles from "./ListItem.styles";
+import { showCensoredMoney } from "src/utils/coins";
+import CensoredText from "src/components/lib/CensoredText/CensoredText.component";
 
 type Props = {
   amount: number;
@@ -31,12 +33,18 @@ const ListItem = (props: AssetListItemProps) => {
         <Text style={styles.price}>${current_price}</Text>
       </View>
       <View style={styles.tokenAmountContainer}>
-        <Text fontWeight="600" style={styles.assetValueMoney}>
-          ${calculateValue(amount, current_price)}
-        </Text>
-        <Text style={styles.amount}>
-          {amount} {symbol}
-        </Text>
+        <CensoredText
+          text={calculateValue(amount, current_price)}
+          length={5}
+          fontWeight="600"
+          style={styles.assetValueMoney}
+        />
+        <CensoredText
+          text={amount + " " + symbol}
+          length={6}
+          style={styles.amount}
+          showDollarSign={false}
+        />
       </View>
     </View>
   );

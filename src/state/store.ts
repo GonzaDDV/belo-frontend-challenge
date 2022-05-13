@@ -17,10 +17,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import coins from "./slices/coins";
 import swap from "./slices/swap";
+import settings from "./slices/settings";
 
 const rootReducer = combineReducers({
   coins,
   swap,
+  settings,
 });
 
 const persistConfig = {

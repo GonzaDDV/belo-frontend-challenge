@@ -5,6 +5,7 @@ import {
   getCoinByName,
   getCoinPriceFromCoinArray,
   getEquivalentAmountInOtherCoin,
+  showCensoredMoney,
 } from "./coins";
 
 describe("Coin utils", () => {
@@ -56,5 +57,10 @@ describe("Coin utils", () => {
     expect(
       getCoinByName(coins as SelectedCoin[], "fake_coin").key
     ).toBeUndefined();
+  });
+
+  it("should get censored money", () => {
+    expect(showCensoredMoney("100", false, 3)).toBe("$***");
+    expect(showCensoredMoney("100", true, 3)).toBe("$100");
   });
 });

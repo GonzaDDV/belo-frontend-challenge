@@ -102,7 +102,8 @@ export const coinsSlice = createSlice({
       const [first, second] = action.payload;
       const firstCoin = getCoinByName(state.user.coins, first.key);
       let secondCoin = getCoinByName(state.user.coins, second.key);
-      if (!firstCoin || !secondCoin || firstCoin.index === -1) return;
+      if (!firstCoin || !secondCoin || firstCoin.index === -1)
+        throw new Error();
 
       // if the user doesn't have the second coin, add it to the user coins array
       if (secondCoin.index === -1) {

@@ -1,5 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SelectedCoin } from "src/state/slices/swap";
+import { store } from "src/state/store";
 import { CGCoin } from "src/ts/types";
 
 interface Params {
@@ -34,4 +34,21 @@ export const getCoinByName = (coins: SelectedCoin[], coinName: string) => {
   const index = coins.findIndex((coin) => coin.key === coinName);
 
   return { ...coins[index], index };
+};
+
+export const showCensoredMoney = (
+  originalText: string,
+  showMoney: boolean,
+  length: number,
+  showDollarSign = true
+) => {
+  let initialString = showDollarSign ? "$" : "";
+
+  if (showMoney) return initialString + originalText;
+
+  for (let i = 0; i < length; i++) {
+    initialString += "*";
+  }
+
+  return initialString;
 };

@@ -78,7 +78,6 @@ export const swapSlice = createSlice({
       state.error = "";
     },
   },
-  extraReducers: (builder) => {},
 });
 
 export const {
