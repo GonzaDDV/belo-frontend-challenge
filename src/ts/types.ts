@@ -46,11 +46,12 @@ export interface CGCoinRoi {
 // React Navigation Types
 export type RootStackParamList = {
   Home: undefined;
-  Swap: { token: string } | undefined;
+  Swap: undefined;
+  Settings: undefined;
 };
 
 export type SwapStackParamList = {
-  SwapHome: { token: string } | undefined;
+  SwapHome: undefined;
   SwapSuccess: undefined;
   SwapFailure: undefined;
   SwapConfirmation: undefined;

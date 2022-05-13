@@ -15,10 +15,14 @@ export default StyleSheet.create({
   assetsLabel: {
     fontSize: theme.fontSizes.m,
     color: theme.colors.gray[600],
-    marginBottom: theme.spacing.m,
   },
 
   swapButton: {
     marginTop: "auto",
+  },
+
+  yourAssets: {
+    justifyContent: "space-between",
+    marginBottom: theme.spacing.l,
   },
 });

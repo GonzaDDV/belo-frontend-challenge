@@ -4,8 +4,9 @@ import {
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
 import HomeScreen from "src/screens/Home/Home.screen";
-import { RootStackParamList } from "src/ts/types";
+import SettingsScreen from "src/screens/Settings/Settings.screen";
 import SwapNavigator from "./SwapNavigator";
+import { RootStackParamList } from "src/ts/types";
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -19,6 +20,7 @@ const RootNavigator = () => {
       <RootStack.Navigator screenOptions={navigatorOptions}>
         <RootStack.Screen name="Home" component={HomeScreen} />
         <RootStack.Screen name="Swap" component={SwapNavigator} />
+        <RootStack.Screen name="Settings" component={SettingsScreen} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

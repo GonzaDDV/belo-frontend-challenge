@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { FlatList, TouchableWithoutFeedback, View } from "react-native";
 import { CGCoin, RootStackParamList } from "src/ts/types";
 
 import ListItem from "./ListItem/ListItem.component";
@@ -9,6 +9,11 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { User } from "src/state/slices/coins";
 import styles from "./AssetsList.styles";
 import { getCoinByName } from "src/utils/coins";
+import { defaultStyles } from "src/constants/styles";
+import { MaterialIcons } from "@expo/vector-icons";
+import { theme } from "src/constants/theme";
+import { useSelector } from "react-redux";
+import { RootState } from "src/state/store";
 
 interface Props {
   tokens: Array<CGCoin>;
@@ -24,26 +29,44 @@ type SwapScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 const AssetsList = (props: Props) => {
+  const { showNoBalanceCoins } = useSelector(
+    (state: RootState) => state.settings
+  );
   const { navigate } = useNavigation<SwapScreenNavigationProp>();
 
   const goToSwapScreen = () => {
     navigate("Swap");
   };
 
+  const goToSettingsScreen = () => {
+    navigate("Settings");
+  };
+
   return (
     <View style={styles.assetsContainer}>
-      <Text style={styles.assetsLabel} fontWeight="500">
-        Your assets
-      </Text>
+      <View style={[defaultStyles.row, styles.yourAssets]}>
+        <Text style={styles.assetsLabel} fontWeight="500">
+          Your assets
+        </Text>
+        <TouchableWithoutFeedback onPress={goToSettingsScreen}>
+          <MaterialIcons
+            name="settings"
+            size={24}
+            color={theme.colors.gray[600]}
+          />
+        </TouchableWithoutFeedback>
+      </View>
       <FlatList
         keyExtractor={keyExtractor}
         data={props.tokens}
-        renderItem={({ item }) => (
-          <ListItem
-            {...item}
-            amount={getCoinByName(props.user.coins, item.name)?.amount || 0}
-          />
-        )}
+        renderItem={({ item }) => {
+          const coinAmount =
+            getCoinByName(props.user.coins, item.name)?.amount || 0;
+
+          if (!coinAmount && !showNoBalanceCoins) return null;
+
+          return <ListItem {...item} amount={coinAmount} />;
+        }}
         style={{ maxHeight: height * 0.45 }}
       />
 

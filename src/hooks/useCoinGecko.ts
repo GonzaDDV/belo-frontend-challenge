@@ -8,6 +8,7 @@ export const useCoinGecko = () => {
   const { coins, loading, user } = useSelector(
     (state: RootState) => state.coins
   );
+
   const dispatch = useTypedDispatch();
 
   useEffect(() => {

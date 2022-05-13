@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   showMoney: true,
+  showNoBalanceCoins: true,
 };
 
 export const settingsSlice = createSlice({
@@ -11,8 +12,13 @@ export const settingsSlice = createSlice({
     toggleShowMoney: (state) => {
       state.showMoney = !state.showMoney;
     },
+
+    toggleShowNoBalanceCoins: (state) => {
+      state.showNoBalanceCoins = !state.showNoBalanceCoins;
+    },
   },
 });
 
-export const { toggleShowMoney } = settingsSlice.actions;
+export const { toggleShowMoney, toggleShowNoBalanceCoins } =
+  settingsSlice.actions;
 export default settingsSlice.reducer;
