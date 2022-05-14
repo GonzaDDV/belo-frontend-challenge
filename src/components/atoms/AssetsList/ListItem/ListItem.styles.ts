@@ -49,4 +49,7 @@ export default StyleSheet.create({
     fontSize: theme.fontSizes.xs,
     color: theme.colors.gray[500],
   },
+  arrow: {
+    marginLeft: theme.spacing.m,
+  },
 });

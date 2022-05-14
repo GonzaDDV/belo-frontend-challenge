@@ -2,10 +2,6 @@ import { StyleSheet } from "react-native";
 import { theme } from "src/constants/theme";
 
 export default StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
   mainView: {
     backgroundColor: theme.colors.background,
   },

@@ -42,7 +42,7 @@ const SwapConfirmationScreen = (props: SwapConfirmationScreenProps) => {
     <ScreenMainView style={styles.mainContainer} showBackButton>
       <View style={styles.container}>
         <Text style={styles.title} fontWeight="bold">
-          Are you sure you want to confirm this transaction?
+          Do you want to confirm this transaction?
         </Text>
         <Text style={styles.text} fontWeight="400">
           You will swap {firstCoin.amount} {firstCoin.key} for{" "}

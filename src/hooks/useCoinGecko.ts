@@ -11,9 +11,13 @@ export const useCoinGecko = () => {
 
   const dispatch = useTypedDispatch();
 
-  useEffect(() => {
+  const refetch = () => {
     dispatch(fetchCoins(acceptedCoins));
+  };
+
+  useEffect(() => {
+    refetch();
   }, [acceptedCoins]);
 
-  return { coins, loading, user };
+  return { coins, loading, user, refetch };
 };

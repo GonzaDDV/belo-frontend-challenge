@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface SelectedCoin {
   key: string;
@@ -28,7 +28,7 @@ export const swapSlice = createSlice({
   name: "coins",
   initialState,
   reducers: {
-    changeFirstCoin: (state, action) => {
+    changeFirstCoin: (state, action: PayloadAction<SelectedCoin>) => {
       // if user selects the coin that is on second place, swap them
       if (state.selectedCoins[1].key === action.payload.key) {
         const [first, second] = state.selectedCoins;
@@ -40,7 +40,7 @@ export const swapSlice = createSlice({
       state.error = "";
     },
 
-    changeSecondCoin: (state, action) => {
+    changeSecondCoin: (state, action: PayloadAction<SelectedCoin>) => {
       // if user selects the coin that is on first place, swap them
       if (state.selectedCoins[0].key === action.payload.key) {
         const [first, second] = state.selectedCoins;

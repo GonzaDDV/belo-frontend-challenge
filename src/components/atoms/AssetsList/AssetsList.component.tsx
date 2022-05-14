@@ -13,7 +13,8 @@ import { defaultStyles } from "src/constants/styles";
 import { MaterialIcons } from "@expo/vector-icons";
 import { theme } from "src/constants/theme";
 import { useSelector } from "react-redux";
-import { RootState } from "src/state/store";
+import { RootState, useTypedDispatch } from "src/state/store";
+import { changeFirstCoin } from "src/state/slices/swap";
 
 interface Props {
   tokens: Array<CGCoin>;
@@ -32,9 +33,13 @@ const AssetsList = (props: Props) => {
   const { showNoBalanceCoins } = useSelector(
     (state: RootState) => state.settings
   );
+  const dispatch = useTypedDispatch();
   const { navigate } = useNavigation<SwapScreenNavigationProp>();
 
-  const goToSwapScreen = () => {
+  const goToSwapScreen = (coin?: string) => {
+    if (coin) {
+      dispatch(changeFirstCoin({ key: coin, amount: 0 }));
+    }
     navigate("Swap");
   };
 
@@ -65,14 +70,20 @@ const AssetsList = (props: Props) => {
 
           if (!coinAmount && !showNoBalanceCoins) return null;
 
-          return <ListItem {...item} amount={coinAmount} />;
+          return (
+            <ListItem
+              {...item}
+              amount={coinAmount}
+              onPress={() => goToSwapScreen(item.name)}
+            />
+          );
         }}
         style={{ maxHeight: height * 0.45 }}
       />
 
       <RoundedButton
         size="l"
-        onPress={goToSwapScreen}
+        onPress={() => goToSwapScreen()}
         icon="compare-arrows"
         style={styles.swapButton}
       />

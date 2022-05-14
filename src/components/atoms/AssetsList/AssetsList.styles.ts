@@ -10,6 +10,7 @@ export default StyleSheet.create({
     paddingHorizontal: theme.spacing.xl,
     marginTop: theme.spacing.l * 2,
     flexGrow: 1,
+    flex: 1,
     width: "100%",
   },
   assetsLabel: {

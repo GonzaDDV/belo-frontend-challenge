@@ -3,7 +3,7 @@ import { AssetsList } from "src/components/atoms";
 import { defaultStyles } from "src/constants/styles";
 import styles from "./Home.styles";
 
-import { Text, ScreenMainView } from "src/components/lib";
+import { ScreenMainView, Text } from "src/components/lib";
 import { useCoinGecko } from "src/hooks/useCoinGecko";
 import { toggleShowMoney } from "src/state/slices/settings";
 import { RootState, useTypedDispatch } from "src/state/store";
@@ -25,7 +25,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScreenMainView style={[defaultStyles.mainContainer, styles.mainView]}>
+    <ScreenMainView style={styles.mainView}>
       <View style={styles.moneyContainer}>
         <Text style={styles.balanceLabel} fontWeight="500">
           Total balance
@@ -54,7 +54,7 @@ const HomeScreen = () => {
           <View style={styles.gainsContainer}>
             <CensoredText
               text={`${
-                gainIsPositive && "+"
+                gainIsPositive ? "+" : ""
               }$${user?.totalPriceChange24hs.toFixed(2)}`}
               length={4}
               showDollarSign={false}
